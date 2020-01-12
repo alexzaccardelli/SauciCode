@@ -3,18 +3,11 @@ using namespace vex;
 
 namespace arm {
   motor m = motor(PORT1, ratio36_1, false);
-<<<<<<< HEAD
   bool holding = false;
   bool x = false;
   task holdTask;
 
   void reset() {
-    //holdTask = task(hold);
-    holding = false;
-=======
-
-  void reset() {
->>>>>>> 3452e8459878eb6b2aab85303ce821f8442abc94
     m = motor(PORT1, ratio36_1, false);
     m.stop(coast);
     m.resetRotation();
@@ -29,58 +22,29 @@ namespace arm {
     return 1;
   }
   int op() {
-    double upVel = 60, downVel = -100, kP = .4, max = 100;
+    double upVel = 60, downVel = -100;
     while(1) {
-<<<<<<< HEAD
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
         tilter::move(100, 100, .8, 5, 100);
         tilterTask.resume();
         while(con.ButtonX.pressing()) {
           m.spin(fwd, upVel, pct);
-          if(x) {
-            x = false;
-            //h.stop();
-          }
         }
       }
       if(con.ButtonB.pressing()) {
-        
         while(con.ButtonB.pressing()) {
           if(m.position(vex::deg) < 100) {
             tilterTask.suspend();
-            
             tilter::move(0, 100, .8, 5, 100);
             tilterTask.resume();
           }
           m.spin(fwd, downVel, pct);
         }
       }
-      
-      m.stop(vex::brakeType::hold);
+      m.stop(vex::hold);
       holding = false;
-=======
-      while(con.ButtonX.pressing()) {
-        m.spin(fwd, upVel, pct);
-      }
-      while(con.ButtonB.pressing()) {
-        m.spin(fwd, downVel, pct);
-      }
-      if(!con.ButtonB.pressing() && !con.ButtonX.pressing()) {
-        double ticks = m.rotation(deg);
-        double err, vel;
-        while(!con.ButtonB.pressing() && !con.ButtonX.pressing()) {
-          err = ticks - m.rotation(vex::deg);
 
-          if(err * kP > max) vel = max;
-          else if(err * kP < -max) vel = -max;
-
-          m.spin(fwd, vel, pct);
-
-          wait(5, msec);
-        }
-      }
->>>>>>> 3452e8459878eb6b2aab85303ce821f8442abc94
       wait(5, msec);
     }
     return 1;
@@ -106,26 +70,4 @@ namespace arm {
     reset();
     return 1;
   }
-
-  /*int hold() {
-    double max = 100, kP = 0.4; //Temporary
-    while(true) {
-      if(holding) {
-        double ticks = m.rotation(deg);
-        double err, vel;
-        while(holding) {
-          err = ticks - m.rotation(vex::deg);
-
-          if(err * kP > max) vel = max;
-          else if(err * kP < -max) vel = -max;
-
-          m.spin(fwd, vel, pct);
-
-          wait(5, msec);
-        }
-      }
-    }
-    return 1;
-  }*/
-
 }
