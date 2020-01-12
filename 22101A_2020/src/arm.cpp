@@ -3,26 +3,21 @@ using namespace vex;
 
 namespace arm {
   motor m = motor(PORT1, ratio36_1, false);
-  bool holding = false;
-  bool x = false;
-  task holdTask;
 
   void reset() {
     m = motor(PORT1, ratio36_1, false);
     m.stop(coast);
     m.resetRotation();
   }
-
   void stop() {
     m.stop(coast);
   }
-  int blah() {
-    tilter::move(100, 100, .8, 5, 100);
-    x = true;
-    return 1;
+  void spin(double vel) {
+    m.spin(fwd, vel, pct);
   }
+
   int op() {
-    double upVel = 60, downVel = -100;
+    double upVel = 100, downVel = -100;
     while(1) {
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
@@ -43,8 +38,6 @@ namespace arm {
         }
       }
       m.stop(vex::hold);
-      holding = false;
-
       wait(5, msec);
     }
     return 1;
@@ -52,7 +45,7 @@ namespace arm {
 
   int move(double height, double max, double kP, double range, double time) {
     reset();
-    double ticks = height * 1.7, err, vel; //Temporary
+    double ticks = height * 1.7, err, vel; //temporary
     timer t;
     while(1) {
       err = ticks - m.rotation(vex::deg);

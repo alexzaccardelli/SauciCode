@@ -9,7 +9,6 @@ namespace arm {
   void stop();
 
   int move(double height, double max, double kP, double range, double time);
-  int hold();
 
   int op();
 }

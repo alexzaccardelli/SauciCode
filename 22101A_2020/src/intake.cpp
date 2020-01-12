@@ -20,16 +20,36 @@ namespace intake {
   }
 
   int op() {
+    double delay = 200;
+    int last = 0;
     while(1) {
       if(con.ButtonL1.pressing()) {
-        spin(100);
+        if(last == 1) {
+          last = 0;
+          reset();
+        }
+        else {
+          last = 1;
+          spin(100);
+        }
+        while(con.ButtonL1.pressing()) {
+          wait(5, msec);
+        }
+        wait(delay, msec);
       }
       if(con.ButtonL2.pressing()) {
-        spin(-100);
-      }
-      if(con.ButtonDown.pressing()) {
-        l.stop(hold);
-        r.stop(hold);
+        if(last == 2) {
+          last = 0;
+          reset();
+        }
+        else {
+          last = 2;
+          spin(-100);
+        }
+        while(con.ButtonL2.pressing()) {
+          wait(5, msec);
+        }
+        wait(delay, msec);
       }
       wait(5, msec);
     }

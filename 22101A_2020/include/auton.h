@@ -13,6 +13,7 @@ namespace auton {
   void small(int side);
   void big(int side);
   int deployTray();
+  int op();
   void stack();
 }
 

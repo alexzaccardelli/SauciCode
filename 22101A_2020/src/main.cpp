@@ -4,7 +4,7 @@ using namespace vex;
 competition Competition;
 vex::brain cpu;
 controller con;
-task driveTask, intakeTask, tilterTask, armTask;
+task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void usercontrol(void) {
 
@@ -26,6 +26,7 @@ void usercontrol(void) {
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
+  autonTask = task(auton::op);
   while(1) {
     wait(5, msec);
     printf("%f %f\n", arm::m.position(deg), arm::m.torque());

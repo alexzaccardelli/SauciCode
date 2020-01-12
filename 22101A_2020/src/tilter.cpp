@@ -14,15 +14,22 @@ namespace tilter {
     m.stop(vex::hold);
   }
 
+  void spin(double vel) {
+    m.spin(fwd, vel, pct);
+  }
+
   int op() {
-    double upVel = 40, downVel = -100;
+    double upVel = 40, downVel = -100, k = .5;
     while(1) {
       if(con.ButtonR1.pressing()) {
         intakeTask.suspend();
         intake::l.stop(coast);
         intake::r.stop(coast);
         while(con.ButtonR1.pressing()) {
-          m.spin(fwd, upVel, pct);
+          if(m.rotation(deg) < 400)
+            m.spin(fwd, upVel, pct);
+          else
+            m.spin(fwd, upVel*k, pct);
         }
         intake::l.stop(vex::hold);
         intake::r.stop(vex::hold);

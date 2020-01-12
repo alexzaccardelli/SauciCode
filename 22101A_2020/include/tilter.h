@@ -7,9 +7,9 @@ namespace tilter {
 
   void reset();
   void stop();
+  void spin(double vel);
 
   int move(double deg, double max, double kP, double range, double time);
-  int hold();
 
   int op();
 }

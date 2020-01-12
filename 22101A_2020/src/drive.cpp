@@ -6,14 +6,12 @@ namespace drive {
   motor l2 = motor(PORT16, ratio18_1, false);
   motor r1 = motor(PORT20, ratio18_1, true);
   motor r2 = motor(PORT11, ratio18_1, true);
-  encoder lEnc = encoder(cpu.ThreeWirePort.A);
-  encoder rEnc = encoder(cpu.ThreeWirePort.C);
 
   void reset() {
-    //motor l1 = motor(PORT15, ratio18_1, false);
-    //motor l2 = motor(PORT16, ratio18_1, false);
-    //motor r1 = motor(PORT20, ratio18_1, true);
-    //motor r2 = motor(PORT11, ratio18_1, true);
+    motor l1 = motor(PORT15, ratio18_1, false);
+    motor l2 = motor(PORT16, ratio18_1, false);
+    motor r1 = motor(PORT20, ratio18_1, true);
+    motor r2 = motor(PORT11, ratio18_1, true);
     l1.stop(coast);
     l2.stop(coast);
     r1.stop(coast);
@@ -22,8 +20,20 @@ namespace drive {
     l2.resetRotation();
     r1.resetRotation();
     r2.resetRotation();
-    lEnc.resetRotation();
-    rEnc.resetRotation();
+  }
+  void spin(int vel) {
+    l1.spin(fwd, vel, pct);
+    l2.spin(fwd, vel, pct);
+    r1.spin(fwd, vel, pct);
+    r2.spin(fwd, vel, pct);
+  }
+  void spinRight(int vel) {
+    r1.spin(fwd, vel, pct);
+    r2.spin(fwd, vel, pct);
+  }
+  void spinLeft(int vel) {
+    l1.spin(fwd, vel, pct);
+    l2.spin(fwd, vel, pct);
   }
 
   int op() {
@@ -97,7 +107,7 @@ namespace drive {
 
   int turn(double deg, double max, double accel, double kP, double range, double time) {
     reset();
-    double ticks = deg * (360.0/135.0); //Get constant
+    double ticks = deg * (360.0/135.0);
     double lErr, rErr, lVel, rVel;
     timer t;
     while(1) {
@@ -129,26 +139,4 @@ namespace drive {
     reset();
     return 1;
   }
-
-  void spin(int vel) {
-    l1.spin(fwd, vel, pct);
-    l2.spin(fwd, vel, pct);
-    r1.spin(fwd, vel, pct);
-    r2.spin(fwd, vel, pct);
-  }
-
-  void spinRight(int vel) {
-    r1.spin(fwd, vel, pct);
-    r2.spin(fwd, vel, pct);
-  }
-
-  void spinLeft(int vel) {
-    l1.spin(fwd, vel, pct);
-    l2.spin(fwd, vel, pct);
-  }
-
-
-
-
-  
 }

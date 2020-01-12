@@ -4,7 +4,6 @@ using namespace vex;
 
 namespace drive {
   extern motor l1, l2, r1, r2;
-  extern encoder lEnc, rEnc;
 
   void reset();
 
@@ -14,7 +13,6 @@ namespace drive {
 
   int turn(double deg, double max, double accel, double kP, double range, double time);
   int forward(double dist, double max, double accel, double kP, double range, double time);
-
 
   int op();
 }
