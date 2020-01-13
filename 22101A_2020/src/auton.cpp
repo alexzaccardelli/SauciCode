@@ -46,10 +46,7 @@ namespace auton {
   drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
   drive::forward(21, 35.0, 0.6, 0.2, 17, 200);
 
-  intake::l.stop(coast);
-  intake::r.stop(coast);
-  tilter::move(720, 25, .6, 15, 500);
-  drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+  auton::stack;
 
   auton::resetAll();
   driveTask = task(drive::op);
@@ -97,10 +94,7 @@ namespace auton {
     drive::turn(125, 75.0, 0.6, 0.2, 17, 200);
     drive::reset();
     drive::forward(16, 35.0, 0.6, 0.2, 17, 200);
-    intake::l.stop(coast);
-    intake::r.stop(coast);
-    tilter::move(720, 25, .6, 15, 500);
-    drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+    auton::stack();
     return 1;
   }
 
@@ -113,7 +107,10 @@ namespace auton {
   }
 
   void stack() {
-    
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    tilter::move(720, 25, .6, 15, 500);
+    drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
   }
 
 }
