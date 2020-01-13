@@ -15,6 +15,7 @@ namespace auton {
   int deployTray();
   int op();
   void stack();
+  int redSmall();
 }
 
 #endif

@@ -52,7 +52,8 @@ namespace arm {
 
       if(err * kP > max) vel = max;
       else if(err * kP < -max) vel = -max;
-
+      else vel = err * kP;
+      
       m.spin(fwd, vel, pct);
 
       if(fabs(err) > range) t.reset();

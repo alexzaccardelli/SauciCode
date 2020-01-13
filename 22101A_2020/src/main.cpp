@@ -7,30 +7,7 @@ controller con;
 task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void usercontrol(void) {
-
-  intake::spin(100);
-  drive::forward(100, 30.0, 0.6, 0.2, 17, 200);
-  wait(2, vex::seconds);
-  drive::reset();
-  wait(2, vex::seconds);
-  intake::reset();
-  drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
-
-  /*intake::l.stop(coast);
-  intake::r.stop(coast);
-  tilter::move(720, 25, .6, 15, 500);
-  drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);*/
-
-  auton::resetAll();
-  driveTask = task(drive::op);
-  intakeTask = task(intake::op);
-  tilterTask = task(tilter::op);
-  armTask = task(arm::op);
-  autonTask = task(auton::op);
-  while(1) {
-    wait(5, msec);
-    printf("%f %f\n", arm::m.position(deg), arm::m.torque());
-  }
+  auton::redSmall();
 }
 
 void pre_auton(void) {

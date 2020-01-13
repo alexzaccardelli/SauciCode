@@ -13,14 +13,54 @@ namespace auton {
   int deployTray() {
     intake::spin(-100);
     tilter::move(730, 100, .8, 5, 100);
+    tilter::move(150, 100, .8, 5, 100);
+    arm::move(175, 100, .8, 5, 100);
+    arm::m.spin(fwd, -100, pct);
     intake::spin(0);
+    wait(2000, msec);
+    arm::reset();
+    while(tilter::m.torque() < 2.05)
+      tilter::m.spin(fwd, -100, pct);
+    tilter::reset();
+
+
+/*
     while(tilter::m.torque() < 2.05)
       tilter::m.spin(fwd, -100, pct);
     tilter::reset();
     arm::move(350, 100, .8, 5, 100);
     while(arm::m.torque() < 1.5)
       arm::m.spin(fwd, -100, pct);
-    arm::reset();
+    arm::reset();*/
+    return 1;
+  }
+
+  int skills() {
+  auton::deployTray();
+  intake::spin(100);
+  drive::forward(100, 30.0, 0.6, 0.2, 17, 200);
+  wait(2, vex::seconds);
+  drive::reset();
+  wait(2, vex::seconds);
+  intake::reset();
+  drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
+  drive::forward(21, 35.0, 0.6, 0.2, 17, 200);
+
+  intake::l.stop(coast);
+  intake::r.stop(coast);
+  tilter::move(720, 25, .6, 15, 500);
+  drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+
+  auton::resetAll();
+  driveTask = task(drive::op);
+  intakeTask = task(intake::op);
+  tilterTask = task(tilter::op);
+  armTask = task(arm::op);
+  autonTask = task(auton::op);
+  while(1) {
+    wait(5, msec);
+    printf("%f %f\n", arm::m.position(deg), arm::m.torque());
+  }
     return 1;
   }
 
@@ -29,20 +69,38 @@ namespace auton {
       if(con.ButtonLeft.pressing()) {
         driveTask.suspend();
         armTask.suspend();
-        drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+        tilterTask.suspend();
+        drive::forward(-15, 30.0, 0.6, 0.2, 100, 200);
         wait(1000, msec);
-        arm::move(350, 100, .8, 5, 100);
+        tilter::move(150, 100, .8, 5, 100);
+        arm::move(100, 100, .8, 5, 100);
         arm::m.spin(fwd, -100, pct);
-        wait(4000, msec);
+        wait(2000, msec);
         arm::reset();
         while(tilter::m.torque() < 2.05)
           tilter::m.spin(fwd, -100, pct);
         tilter::reset();
+        tilterTask.resume();
         driveTask.resume();
         armTask.resume();
       }
       wait(5, msec);
     }
+    return 1;
+  }
+  int redSmall() {
+    auton::deployTray();
+    intake::spin(100);
+    drive::forward(42, 30.0, 0.6, 0.2, 17, 200);
+    intake::reset();
+    drive::forward(-28, 30.0, 0.6, 0.2, 17, 200);
+    drive::turn(125, 75.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    drive::forward(16, 35.0, 0.6, 0.2, 17, 200);
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    tilter::move(720, 25, .6, 15, 500);
+    drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
     return 1;
   }
 

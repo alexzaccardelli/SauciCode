@@ -52,9 +52,10 @@ namespace tilter {
 
   int move(double deg, double max, double kP, double range, double time) {
     //reset();
-    double ticks = deg, err, vel;
-    timer t;
+    double ticks = deg, err, vel, lastErr;
+    timer t, t1;
     while(1) {
+      lastErr = err;
       err = ticks - m.rotation(vex::deg);
 
       if(err * kP > max) vel = max;
@@ -65,6 +66,8 @@ namespace tilter {
 
       if(fabs(err) > range) t.reset();
       if(t.time(msec) > time) break;
+      if(fabs(err - lastErr) > 20) t1.reset();
+      if(t1.time() > 5000) break;
 
       wait(5, msec);
     }
