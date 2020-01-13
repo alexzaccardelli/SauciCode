@@ -16,13 +16,13 @@ namespace auton {
     tilter::move(150, 100, .8, 5, 100);
     arm::move(175, 100, .8, 5, 100);
     arm::m.spin(fwd, -100, pct);
-    intake::spin(0);
-    wait(2000, msec);
+    //intake::spin(0);
+    intake::l.stop(coast);
+    intake::r.stop(coast);
     arm::reset();
     while(tilter::m.torque() < 2.05)
       tilter::m.spin(fwd, -100, pct);
     tilter::reset();
-
 
 /*
     while(tilter::m.torque() < 2.05)
@@ -88,13 +88,17 @@ namespace auton {
   int redSmall() {
     auton::deployTray();
     intake::spin(100);
-    drive::forward(42, 30.0, 0.6, 0.2, 17, 200);
+    drive::forward(42, 40.0, 0.6, 0.2, 17, 200);
     intake::reset();
-    drive::forward(-28, 30.0, 0.6, 0.2, 17, 200);
-    drive::turn(125, 75.0, 0.6, 0.2, 17, 200);
+    drive::forward(-26, 100.0, 0.6, 0.2, 17, 200);
+    drive::turn(132, 90.0, 0.6, 0.2, 17, 200);
     drive::reset();
-    drive::forward(16, 35.0, 0.6, 0.2, 17, 200);
-    auton::stack();
+    drive::forward(13, 100, 0.6, 0.2, 17, 200);
+    drive::forward(3, 35.0, 0.6, 0.2, 17, 200);
+    tilter::move(720, 50, .6, 15, 500);
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    drive::forward(-10, 50.0, 0.6, 0.2, 17, 200);
     return 1;
   }
 

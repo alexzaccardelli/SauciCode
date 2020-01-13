@@ -7,7 +7,9 @@ controller con;
 task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void usercontrol(void) {
+  timer clown;
   auton::redSmall();
+  cpu.Screen.print("%f\n", clown.time(msec));
 }
 
 void pre_auton(void) {
