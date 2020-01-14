@@ -67,12 +67,12 @@ namespace auton {
         driveTask.suspend();
         armTask.suspend();
         tilterTask.suspend();
-        drive::forward(-15, 30.0, 0.6, 0.2, 100, 200);
+        drive::forward(-15, 50.0, 0.8, 0.2, 100, 200);
         wait(1000, msec);
         tilter::move(150, 100, .8, 5, 100);
         arm::move(100, 100, .8, 5, 100);
         arm::m.spin(fwd, -100, pct);
-        wait(2000, msec);
+        while(arm::m.torque()) {}
         arm::reset();
         while(tilter::m.torque() < 2.05)
           tilter::m.spin(fwd, -100, pct);

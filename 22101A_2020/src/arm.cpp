@@ -21,7 +21,7 @@ namespace arm {
     while(1) {
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
-        tilter::move(100, 100, .8, 5, 100);
+        tilter::move(150, 100, .8, 5, 100);
         tilterTask.resume();
         while(con.ButtonX.pressing()) {
           m.spin(fwd, upVel, pct);
