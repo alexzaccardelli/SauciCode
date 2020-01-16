@@ -10,6 +10,8 @@ namespace tilter {
   void spin(double vel);
 
   int move(double deg, double max, double kP, double range, double time);
+  int moveTilter();
+  bool isComplete();
 
   int op();
 }

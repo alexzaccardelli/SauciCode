@@ -3,6 +3,7 @@ using namespace vex;
 
 namespace tilter {
   motor m = motor(PORT2, ratio36_1, false);
+  bool complete = false;
 
   void reset() {
     m = motor(PORT2, ratio36_1, false);
@@ -28,6 +29,8 @@ namespace tilter {
         while(con.ButtonR1.pressing()) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
+          if(m.rotation(deg) > 810) 
+            m.spin(fwd,-upVel, pct);
           else
             m.spin(fwd, upVel*k, pct);
         }
@@ -74,4 +77,47 @@ namespace tilter {
     stop();
     return 1;
   }
+
+  bool isComplete(){
+      return complete;
+
+    }
+
+    int moveTilter() { //for auton task
+    if(!complete) {
+      printf("start");
+    reset();
+    double deg = 730;
+    double kP = 0.6;
+    double max = 40;
+    double range = 15;
+    double time = 500;
+    double err = 0.0;
+    double ticks = deg, vel, lastErr;
+    timer t, t1;
+    while(1) {
+      lastErr = err;
+      err = ticks - m.rotation(vex::deg);
+
+      if(err * kP > max) vel = max;
+      else if(err * kP < -max) vel = -max;
+      else vel = err * kP;
+
+      m.spin(fwd, vel, pct);
+
+      if(fabs(err) > range) t.reset();
+      if(t.time(msec) > time) break;
+      if(fabs(err - lastErr) > 20) t1.reset();
+      if(t1.time() > 5000) break;
+
+      wait(5, msec);
+    }
+    stop();
+    complete = true;
+    }
+    return 1;
+    
+    
+  }
+
 }

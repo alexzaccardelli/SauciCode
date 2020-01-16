@@ -16,6 +16,7 @@ namespace auton {
   int op();
   void stack();
   int redSmall();
+  int threePoint();
 }
 
 #endif

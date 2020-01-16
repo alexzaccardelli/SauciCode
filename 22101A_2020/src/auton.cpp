@@ -102,6 +102,30 @@ namespace auton {
     return 1;
   }
 
+  int threePoint() {
+    //auton::deployTray();
+    intake::spin(100);
+    drive::forward(34, 50.0, 0.6, 0.2, 17, 200);
+    intake::reset();
+    drive::forward(-18, 100.0, 0.6, 0.2, 17, 100);
+    drive::turn(120, 60.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    vex::task tiltTask = vex::task(tilter::moveTilter);
+    drive::forward(15, 60, 0.6, 0.2, 17, 200);
+    printf("begin");
+    //tilter::move(720, 50, .6, 15, 500); 
+    //vex::task tiltTask = vex::task(tilter::moveTilter);
+    //wait(1,vex::sec);
+    //while(!tilter::isComplete()){}
+    //tiltTask.suspend();
+    printf("continue");
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    wait(2, sec);
+    drive::forward(-10, 50.0, 0.6, 0.2, 17, 200);
+    return 1;
+  }
+
   void small() {
 
   }
