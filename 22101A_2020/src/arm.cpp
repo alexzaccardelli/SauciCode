@@ -16,16 +16,21 @@ namespace arm {
     m.spin(fwd, vel, pct);
   }
 
+  int blah() {
+    tilter::move(150, 100, .8, 5, 100);
+    return 1;
+  }
+
   int op() {
     double upVel = 100, downVel = -100;
     while(1) {
       if(con.ButtonX.pressing()) {
         tilterTask.suspend();
-        tilter::move(150, 100, .8, 5, 100);
-        tilterTask.resume();
+        task h = task(blah);
         while(con.ButtonX.pressing()) {
           m.spin(fwd, upVel, pct);
         }
+        tilterTask.resume();
       }
       if(con.ButtonB.pressing()) {
         while(con.ButtonB.pressing()) {

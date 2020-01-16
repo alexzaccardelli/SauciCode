@@ -13,7 +13,7 @@ void usercontrol(void) {
   auton::threePoint();
   cpu.Screen.print("%f\n", clown.time(msec));
   printf("%f\n", clown.time(msec)); 
-  /*driveTask = task(drive::op);
+  driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
   armTask = task(arm::op);
@@ -21,7 +21,7 @@ void usercontrol(void) {
   while(1) {
     wait(5, msec);
     printf("%f %f\n", tilter::m.position(deg), arm::m.torque());
-  }*/
+  }
   
 }
 

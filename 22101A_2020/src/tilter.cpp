@@ -26,7 +26,7 @@ namespace tilter {
         intakeTask.suspend();
         intake::l.stop(coast);
         intake::r.stop(coast);
-        while(con.ButtonR1.pressing()) {
+        while(con.ButtonR1.pressing() && m.rotation(deg) < 800) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
           if(m.rotation(deg) > 810) 
