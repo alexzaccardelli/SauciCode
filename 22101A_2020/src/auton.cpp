@@ -85,7 +85,7 @@ namespace auton {
     }
     return 1;
   }
-  int redSmall() {
+  /*int redSmall() {
     auton::deployTray();
     intake::spin(100);
     drive::forward(42, 40.0, 0.6, 0.2, 17, 200);
@@ -100,26 +100,52 @@ namespace auton {
     intake::r.stop(coast);
     drive::forward(-10, 50.0, 0.6, 0.2, 17, 200);
     return 1;
-  }
+  }*/
 
-  int threePoint() {
+  int redSmall() {
     auton::deployTray();
     wait(800, msec);
     intake::spin(100);
     drive::forward(34, 50.0, 0.6, 0.2, 17, 200);
-    wait(250, msec);
+    wait(270, msec);
     intake::reset();
     drive::forward(-18, 100.0, 0.6, 0.2, 17, 100);
-    drive::turn(122, 60.0, 0.6, 0.2, 17, 200);
+    drive::turn(123, 60.0, 0.6, 0.2, 17, 200);
     drive::reset();
     vex::task tiltTask = vex::task(tilter::moveTilter);
-    drive::forward(13.5, 60, 0.6, 0.2, 17, 200);
+    drive::forward(14.0, 60, 0.6, 0.2, 17, 200);
     printf("begin");
-    //tilter::move(720, 50, .6, 15, 500); 
-    //vex::task tiltTask = vex::task(tilter::moveTilter);
-    //wait(1,vex::sec);
-    //while(!tilter::isComplete()){}
-    //tiltTask.suspend();
+    /*tilter::move(720, 50, .6, 15, 500); 
+    vex::task tiltTask = vex::task(tilter::moveTilter);
+    wait(1,vex::sec);
+    while(!tilter::isComplete()){}
+    tiltTask.suspend(); */
+    printf("continue");
+    intake::l.stop(coast);
+    intake::r.stop(coast);
+    wait(2, sec);
+    drive::forward(-10, 40.0, 0.6, 0.2, 17, 200);
+    return 1;
+  }
+
+  int blueSmall() {
+    auton::deployTray();
+    wait(800, msec);
+    intake::spin(100);
+    drive::forward(34, 50.0, 0.6, 0.2, 17, 200);
+    wait(310, msec);
+    intake::reset();
+    drive::forward(-18, 100.0, 0.6, 0.2, 17, 100);
+    drive::turn(-148, 60.0, 0.6, 0.2, 17, 200);
+    drive::reset();
+    vex::task tiltTask = vex::task(tilter::moveTilter);
+    drive::forward(14.0, 60, 0.6, 0.2, 17, 200);
+    printf("begin");
+    /*tilter::move(720, 50, .6, 15, 500); 
+    vex::task tiltTask = vex::task(tilter::moveTilter);
+    wait(1,vex::sec);
+    while(!tilter::isComplete()){}
+    tiltTask.suspend(); */
     printf("continue");
     intake::l.stop(coast);
     intake::r.stop(coast);
