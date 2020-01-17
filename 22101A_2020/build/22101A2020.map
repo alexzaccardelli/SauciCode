@@ -82,12 +82,8 @@ Discarded input sections
  .llvm_addrsig  0x00000000       0x11 build/src/main.o
  .text          0x00000000        0x0 build/src/auton.o
  .text._ZN5auton6skillsEv
-                0x00000000      0x278 build/src/auton.o
+                0x00000000      0x380 build/src/auton.o
  .ARM.exidx.text._ZN5auton6skillsEv
-                0x00000000        0x8 build/src/auton.o
- .text._ZN5auton5stackEv
-                0x00000000       0xe8 build/src/auton.o
- .ARM.exidx.text._ZN5auton5stackEv
                 0x00000000        0x8 build/src/auton.o
  .text._ZN5auton8redSmallEv
                 0x00000000      0x2b0 build/src/auton.o
@@ -100,6 +96,14 @@ Discarded input sections
  .text._ZN5auton3bigEv
                 0x00000000        0x4 build/src/auton.o
  .ARM.exidx.text._ZN5auton3bigEv
+                0x00000000        0x8 build/src/auton.o
+ .text._ZN5auton5stackEv
+                0x00000000       0xe8 build/src/auton.o
+ .ARM.exidx.text._ZN5auton5stackEv
+                0x00000000        0x8 build/src/auton.o
+ .text._ZN5auton8onePointEv
+                0x00000000       0x68 build/src/auton.o
+ .ARM.exidx.text._ZN5auton8onePointEv
                 0x00000000        0x8 build/src/auton.o
  .llvm_addrsig  0x00000000        0xd build/src/auton.o
  .text          0x00000000        0x0 build/src/arm.o

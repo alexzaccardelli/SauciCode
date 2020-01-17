@@ -8,6 +8,8 @@ task driveTask, intakeTask, tilterTask, armTask, autonTask;
 
 void usercontrol(void) {
   auton::resetAll();
+  //auton::deployTray();
+  //auton::skills();
   driveTask = task(drive::op);
   intakeTask = task(intake::op);
   tilterTask = task(tilter::op);
@@ -16,6 +18,8 @@ void usercontrol(void) {
   while(1) {
     wait(5, msec);
   }
+
+  
 }
 
 void pre_auton(void) {

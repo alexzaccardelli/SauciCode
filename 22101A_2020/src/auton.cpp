@@ -46,7 +46,12 @@ namespace auton {
   drive::turn(33, 75.0, 0.6, 0.2, 17, 200);
   drive::forward(21, 35.0, 0.6, 0.2, 17, 200);
 
-  auton::stack;
+  //stacking
+  intake::l.stop(coast);
+  intake::r.stop(coast);
+  tilter::move(770, 25, .6, 15, 500);
+  wait(2, vex::seconds);
+  drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
 
   auton::resetAll();
   driveTask = task(drive::op);
@@ -167,6 +172,16 @@ namespace auton {
     intake::r.stop(coast);
     tilter::move(720, 25, .6, 15, 500);
     drive::forward(-10, 30.0, 0.6, 0.2, 17, 200);
+  }
+
+  void onePoint(){
+   drive::spin(-50);
+  wait(500, msec);
+  drive::reset();
+  drive::spin(50);
+  wait(500,msec);
+  drive::reset();
+  auton::deployTray();
   }
 
 }
