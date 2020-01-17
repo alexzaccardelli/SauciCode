@@ -14,7 +14,7 @@ namespace auton {
     intake::spin(-100);
     tilter::move(730, 100, .8, 5, 100);
     tilter::move(150, 100, .8, 5, 100);
-    arm::move(175, 100, .8, 5, 100);
+    arm::move(130, 100, .8, 5, 100);
     arm::m.spin(fwd, -100, pct);
     //intake::spin(0);
     intake::l.stop(coast);
@@ -103,15 +103,17 @@ namespace auton {
   }
 
   int threePoint() {
-    //auton::deployTray();
+    auton::deployTray();
+    wait(800, msec);
     intake::spin(100);
     drive::forward(34, 50.0, 0.6, 0.2, 17, 200);
+    wait(250, msec);
     intake::reset();
     drive::forward(-18, 100.0, 0.6, 0.2, 17, 100);
-    drive::turn(120, 60.0, 0.6, 0.2, 17, 200);
+    drive::turn(122, 60.0, 0.6, 0.2, 17, 200);
     drive::reset();
     vex::task tiltTask = vex::task(tilter::moveTilter);
-    drive::forward(15, 60, 0.6, 0.2, 17, 200);
+    drive::forward(13.5, 60, 0.6, 0.2, 17, 200);
     printf("begin");
     //tilter::move(720, 50, .6, 15, 500); 
     //vex::task tiltTask = vex::task(tilter::moveTilter);
@@ -122,7 +124,7 @@ namespace auton {
     intake::l.stop(coast);
     intake::r.stop(coast);
     wait(2, sec);
-    drive::forward(-10, 50.0, 0.6, 0.2, 17, 200);
+    drive::forward(-10, 40.0, 0.6, 0.2, 17, 200);
     return 1;
   }
 

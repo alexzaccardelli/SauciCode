@@ -26,7 +26,7 @@ namespace tilter {
         intakeTask.suspend();
         intake::l.stop(coast);
         intake::r.stop(coast);
-        while(con.ButtonR1.pressing()) {
+        while(con.ButtonR1.pressing() && m.rotation(deg) < 800) {
           if(m.rotation(deg) < 400)
             m.spin(fwd, upVel, pct);
           if(m.rotation(deg) > 810) 
@@ -87,7 +87,7 @@ namespace tilter {
     if(!complete) {
       printf("start");
     reset();
-    double deg = 730;
+    double deg = 710;
     double kP = 0.6;
     double max = 40;
     double range = 15;
